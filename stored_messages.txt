@@ -1,0 +1,6 @@
+Human: Hi
+AI: Hello! How can I help you today?
+Human: What is Python?
+AI: Python is a high-level programming language used for web development, AI, data science, automation, and more.
+Human: Give me an example of a list.
+AI: Here's an example: fruits = ["Apple", "Banana", "Orange"]

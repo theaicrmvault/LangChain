@@ -4,7 +4,9 @@ langchain-core
 
 # OpenAI Integration
 langchain-openai
-openai
+openai	
+langchain
+langchain_core
 
 # Anthropic Integration
 langchain-anthropic
