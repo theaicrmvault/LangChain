@@ -3,10 +3,8 @@ langchain
 langchain-core
 
 # OpenAI Integration
-langchain-openai
 openai	
-langchain
-langchain_core
+langchain-openai
 
 # Anthropic Integration
 langchain-anthropic
@@ -26,3 +24,6 @@ python-dotenv
 # Machine Learning Utilities
 numpy
 scikit-learn
+
+# Data validation using Python type hints
+pydantic

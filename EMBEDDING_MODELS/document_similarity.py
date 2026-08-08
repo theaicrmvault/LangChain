@@ -1,12 +1,30 @@
+# OpenAIEmbeddings converts text into numerical vector representations
+# that capture the semantic meaning of the text.
 from langchain_openai import OpenAIEmbeddings
+
+# Utility for loading API credentials from environment variables.
 from dotenv import load_dotenv
+
+# Used to calculate cosine similarity between the query vector
+# and document vectors.
 from sklearn.metrics.pairwise import cosine_similarity
+
+# NumPy is used for numerical/vector operations.
 import numpy as np
 
+# Load environment variables such as the OpenAI API key
+# from the .env file.
 load_dotenv()
 
-embeddings = OpenAIEmbeddings(model="text-embedding-3-large",dimensions=300)
 
+# Initialize the embedding model.
+# text-embedding-3-large generates high-dimensional semantic vectors.
+# dimensions=300 reduces the output vector size to 300 dimensions,
+# which can reduce storage and similarity-search costs.
+embeddings = OpenAIEmbeddings(model="text-embedding-3-large", dimensions=300)
+
+
+# Sample knowledge base containing documents that will be searched.
 documents = [
     "Artificial intelligence is transforming healthcare by helping doctors diagnose diseases faster.",
     "Machine learning models require high-quality training data to produce accurate predictions.",
@@ -22,18 +40,38 @@ documents = [
     "The user forgot their password and needs help accessing their account.",
     "The restaurant serves authentic Italian pizza, pasta, and tiramisu.",
     "The database connection timed out while processing the API request.",
-    "My laptop battery drains quickly when running machine learning models locally."
+    "My laptop battery drains quickly when running machine learning models locally.",
 ]
 
+
+# Natural-language query that will be used to search the knowledge base.
 query = "Tell me about the Eiffel Tower and its history."
 
+
+# Convert every document into an embedding vector.
+# Each document is represented as a numerical vector capturing
+# its semantic meaning.
 doc_embeddings = embeddings.embed_documents(documents)
+
+
+# Convert the user's query into an embedding vector using the
+# same embedding model used for the documents.
 query_embedding = embeddings.embed_query(query)
 
+
+# Calculate the cosine similarity between the query vector
+# and every document vector.
+# Higher similarity generally indicates greater semantic relevance.
 scores = cosine_similarity([query_embedding], doc_embeddings)[0]
 
+
+# Find the document with the highest similarity score.
+# enumerate() provides both the document index and its score.
 index, score = max(enumerate(scores), key=lambda x: x[1])
 
-print('query:', query)
-print('similarity score', score)
-print('most similar document:',documents[index])
+
+# Display the query, relevance score, and most semantically
+# similar document.
+print("query:", query)
+print("similarity score:", score)
+print("most similar document:", documents[index])
