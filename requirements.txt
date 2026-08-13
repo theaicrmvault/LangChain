@@ -27,3 +27,5 @@ scikit-learn
 
 # Data validation using Python type hints
 pydantic
+
+grandalf
